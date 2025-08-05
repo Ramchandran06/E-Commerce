@@ -1,0 +1,25 @@
+.admin-wrapper {
+  background-color: #1c2541;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  background-color: #161d31;
+  min-height: 100vh;
+  padding: 15px;
+}
+
+.admin-sidebar .nav-link {
+  color: #adb5bd;
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active {
+  background-color: #00aaff;
+  color: white;
+}
+
+.admin-content {
+  padding: 30px;
+}

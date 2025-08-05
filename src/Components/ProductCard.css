@@ -1,0 +1,131 @@
+.product-card-wrapper {
+  position: relative;
+  border-radius: 15px; 
+  overflow: hidden;
+  height: 100%;
+  background-color: #2c3e50;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  outline: none; 
+}
+
+
+.product-card-wrapper:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.product-image-container {
+  overflow: hidden;
+  position: relative; 
+  line-height: 0; 
+}
+
+.product-img {
+  width: 100%;
+  aspect-ratio: 1 / 1.1;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card-wrapper:hover .product-img {
+  transform: scale(1.1);
+}
+
+.product-info {
+  padding: 20px;
+}
+
+.product-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  display: -webkit-box; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 44px; 
+}
+.product-title:hover {
+  color: #00aaff;
+}
+
+.product-rating {
+  color: #ffc107;
+  font-size: 0.9rem;
+}
+
+.product-price {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+}
+
+
+.product-actions {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; 
+}
+
+.product-card-wrapper:hover,
+.product-card-wrapper:focus-within {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 170, 255, 0.3);
+}
+.product-card-wrapper:hover .product-img,
+.product-card-wrapper:focus-within .product-img {
+  transform: scale(1.1);
+}
+.product-card-wrapper:hover .product-actions,
+.product-card-wrapper:focus-within .product-actions {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.wishlist-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2; 
+}
+
+.wishlist-icon:hover {
+  background-color: rgba(220, 53, 69, 0.8);
+}
+
+.wishlist-icon.active {
+  color: #dc3545;
+  background-color: white;
+}
+
+.product-tag {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 2; 
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+.product-tag:hover{
+  transform: scale(1.05);
+  background-color: #00aaff !important;
+}

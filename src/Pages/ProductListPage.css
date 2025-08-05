@@ -1,0 +1,73 @@
+.filter-sidebar {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(15px);
+    position: sticky;
+    top: 120px;
+}
+.filter-title {
+    color: white; margin-bottom: 15px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.category-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.category-pill {
+    background: rgba(255, 255, 255, 0.1); color: #e0e0e0;
+    border: 1px solid transparent; padding: 8px 15px; border-radius: 20px;
+    cursor: pointer; transition: all 0.3s ease;
+}
+.category-pill.active, .category-pill:hover {
+    background: #00aaff; color: white; border-color: #00aaff;
+}
+.rating-filter .star-icon { color: #ccc; cursor: pointer; transition: color 0.2s; }
+.rating-filter .star-icon.active, .rating-filter:hover .star-icon { color: #ffc107; }
+.rating-filter:hover .star-icon:hover ~ .star-icon { color: #ccc; }
+.rc-slider-track { background-color: #00aaff; }
+.rc-slider-handle { border-color: #00aaff; }
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 40px;
+  user-select: none; 
+}
+.pagination-container .page-item {
+  margin: 0 4px;
+}
+.pagination-container .page-link {
+  cursor: pointer;
+  color: #dee2e6;
+  background-color: transparent;
+  border: 1px solid #495057;
+  border-radius: 0.375rem; 
+  transition: all 0.2s ease;
+}
+.pagination-container .page-link:hover {
+  background-color: #495057;
+  color: white;
+}
+.pagination-container .page-item a:hover {
+  background-color: #466380;
+}
+.pagination-container .page-item.active .page-link {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.5);
+}
+.pagination-container .page-item.previous a,
+.pagination-container .page-item.next a {
+    
+  font-weight: bold;
+}
+.pagination-container .page-item.disabled .page-link {
+  color: #6c757d;
+  background-color: transparent;
+  border-color: #495057;
+  cursor: not-allowed;
+}

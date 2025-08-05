@@ -1,0 +1,69 @@
+.contact-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  color: #e0e0e0;
+}
+
+.form-floating > .form-control {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+.form-floating > .form-control::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
+.form-floating > .form-control:focus {
+  background-color: transparent;
+  border-color: #00aaff;
+  box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+  color: white;
+}
+.form-floating > .form-label {
+  color: #adb5bd !important;
+}
+
+.form-floating > .form-control {
+  color: white !important;
+}
+
+.faq-accordion .accordion-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+.faq-accordion .accordion-button {
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+}
+.faq-accordion .accordion-button:not(.collapsed) {
+  background-color: rgba(0, 170, 255, 0.1);
+  color: #00aaff;
+}
+.faq-accordion .accordion-button:focus {
+  box-shadow: none;
+}
+.faq-accordion .accordion-button::after {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.contact-info-item svg {
+  color: #00aaff;
+}
+.floating-label.form-control {
+  color: #ffffff !important; 
+}
+
+
+.floating-label.form-control::placeholder {
+  color: transparent;
+}
+
+.form-floating > .form-control ~ label {
+  color: #adb5bd; 
+}

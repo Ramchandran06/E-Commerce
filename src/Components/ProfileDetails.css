@@ -1,0 +1,31 @@
+.logout-btn {
+  font-weight: 700;
+  color: #ffffff;
+  background-color: red;
+  border: 1px solid red;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: red;
+  background-color: #0e0d0d;
+  border-color: red;
+  transform: scale(1.05);
+}
+.edit-btn {
+  font-weight: 700;
+  color: rgb(245, 243, 243);
+  background-color: rgb(18, 60, 248);
+  transition: all 0.3s ease;
+}
+.edit-btn:hover {
+  color: aqua;
+  background-color: black;
+  border-color: rgb(11, 67, 252);
+  border: 1px solid aqua;
+  transform: scale(1.05);
+}
+.profile-avatar {
+  object-fit: cover;
+  border: 3px solid #0d6efd;
+}

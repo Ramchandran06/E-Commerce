@@ -1,0 +1,69 @@
+.about-header-banner {
+  height: 50vh;
+  position: relative;
+  width: 100vw;
+  left: 50%; right: 50%;
+  margin-left: -50vw; margin-right: -50vw;
+  background-image: url('https://images.pexels.com/photos/322207/pexels-photo-322207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+.about-header-banner::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+.about-banner-content { position: relative; z-index: 2; }
+
+/* Section Styles */
+.about-section {
+  padding: 60px 0;
+}
+
+.mission-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* Value Cards */
+.value-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+  height: 100%;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.value-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.1);
+}
+.value-icon {
+  font-size: 3rem;
+  color: #00aaff;
+  margin-bottom: 20px;
+}
+
+/* Team Section */
+.team-member-card {
+  text-align: center;
+}
+.team-member-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #00aaff;
+  box-shadow: 0 5px 20px rgba(0, 170, 255, 0.3);
+  margin-bottom: 15px;
+}

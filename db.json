@@ -1,0 +1,293 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Elegant Red Silk Saree",
+      "description": "A beautiful red saree made from premium silk, perfect for weddings and festive occasions. Comes with a matching blouse piece.",
+      "price": "3200",
+      "discountPercentage": 40,
+      "rating": 4.8,
+      "stock": "19",
+      "brand": "EthnicElegance",
+      "category": "sarees",
+      "thumbnail": "https://gunjfashion.com/cdn/shop/files/red-kanjivaram-silk-elegant-saree-with-jacquard-work_1.jpg?v=1712573303",
+      "images": [
+        "https://images.pexels.com/photos/16843236/pexels-photo-16843236/free-photo-of-indian-woman-in-a-red-sari.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/15952044/pexels-photo-15952044/free-photo-of-a-woman-in-a-traditional-indian-sari.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Modern Blue Cotton Kurti",
+      "description": "Stay stylish and comfortable with this modern blue kurti. Made from soft cotton fabric, ideal for casual and office wear.",
+      "price": "1700",
+      "discountPercentage": 30,
+      "rating": 4.5,
+      "stock": "25",
+      "brand": "UrbanChic",
+      "category": "kurtis",
+      "thumbnail": "https://www.kala-niketan.in/cdn/shop/products/bandhani-blue-printed-stylish-kurti-with-cotton-pant.jpg?v=1628182009",
+      "images": [
+        "https://images.pexels.com/photos/11499538/pexels-photo-11499538.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Classic Kanjeevaram Saree",
+      "description": "Embrace tradition with this classic Kanjeevaram silk saree, featuring intricate designs and a rich texture.",
+      "price": 7999,
+      "discountPercentage": 15,
+      "rating": 4.9,
+      "stock": 8,
+      "brand": "RoyalSilks",
+      "category": "sarees",
+      "thumbnail": "https://i.pinimg.com/736x/4d/98/3d/4d983de2a30da0a2ba9d4456034357b7.jpg",
+      "images": [
+        "https://images.pexels.com/photos/15952044/pexels-photo-15952044/free-photo-of-a-woman-in-a-traditional-indian-sari.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Green Anarkali Suit",
+      "description": "A vibrant green Anarkali suit that brings a fresh look to your ethnic wardrobe. Perfect for parties and functions.",
+      "price": 2899,
+      "discountPercentage": 20,
+      "rating": 4.4,
+      "stock": 22,
+      "brand": "EthnicElegance",
+      "category": "kurtis",
+      "thumbnail": "https://sulbha.com/cdn/shop/files/SFSC-111223-05_1024x1024.jpg?v=1702486469",
+      "images": [
+        "https://images.pexels.com/photos/10189498/pexels-photo-10189498.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Black Party Wear Gown",
+      "description": "Shine at any party with this stunning black evening gown, designed to make a statement.",
+      "price": 5999,
+      "discountPercentage": 25,
+      "rating": 4.7,
+      "stock": 5,
+      "brand": "Glamour",
+      "category": "western",
+      "thumbnail": "https://images.wholesalesalwar.com/2024y/February/47856/Black-Blooming-Faux-Georgette-Party-Wear-Embroidery-Work-Gown-With-Dupatta-DS-1011.jpg",
+      "images": [
+        "https://images.pexels.com/photos/15984638/pexels-photo-15984638/free-photo-of-brunette-in-shiny-dress-on-balcony.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Stylish Denim Jacket",
+      "description": "A must-have classic denim jacket for a cool and casual look. Can be layered over any outfit.",
+      "price": 1999,
+      "discountPercentage": 10,
+      "rating": 4.6,
+      "stock": 40,
+      "brand": "UrbanRider",
+      "category": "western",
+      "thumbnail": "https://images.pexels.com/photos/1852382/pexels-photo-1852382.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "images": [
+        "https://images.pexels.com/photos/1852382/pexels-photo-1852382.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Elegant Black Saree",
+      "description": "A classic black georgette saree that is both elegant and versatile. Perfect for formal events.",
+      "price": 2499,
+      "discountPercentage": 35,
+      "rating": 4.5,
+      "stock": 18,
+      "brand": "RoyalSilks",
+      "category": "sarees",
+      "thumbnail": "https://clothsvilla.com/cdn/shop/files/black-hot-georgette-saree-bold-elegant_3.jpg",
+      "images": [
+        "https://images.pexels.com/photos/11311394/pexels-photo-11311394.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Floral Print Kurti",
+      "description": "Brighten up your day with this beautiful floral print kurti. Made with breathable fabric for all-day comfort.",
+      "price": 1799,
+      "discountPercentage": 22,
+      "rating": 4.3,
+      "stock": 25,
+      "brand": "UrbanChic",
+      "category": "kurtis",
+      "thumbnail": "https://5.imimg.com/data5/ECOM/Default/2023/8/335669213/NC/CA/DX/52326283/anokherang-combos-pine-green-floral-printed-silk-kurti-with-straight-pants-37653259256057.jpg",
+      "images": [
+        "https://images.pexels.com/photos/11552971/pexels-photo-11552971.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Bohemian Maxi Dress",
+      "description": "A free-spirited bohemian maxi dress with beautiful patterns. Perfect for vacations and summer outings.",
+      "price": 2299,
+      "discountPercentage": 18,
+      "rating": 4.6,
+      "stock": 12,
+      "brand": "StyleUp",
+      "category": "western",
+      "thumbnail": "https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg?auto=compress&cs=tinysrgb&w=600",
+      "images": [
+        "https://images.pexels.com/photos/1689731/pexels-photo-1689731.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Handloom Cotton Saree",
+      "description": "Experience the comfort and elegance of a traditional handloom cotton saree. Lightweight and perfect for daily wear.",
+      "price": 1999,
+      "discountPercentage": 10,
+      "rating": 4.7,
+      "stock": 20,
+      "brand": "EthnicElegance",
+      "category": "sarees",
+      "thumbnail": "https://www.mishaboutique.com/wp-content/uploads/2021/06/midnight-blue-handloom-cotton-saree-with-multi-color-motifs-and-pallu-602107c25a4cf-1612777410.webp",
+      "images": [
+        "https://images.pexels.com/photos/17693998/pexels-photo-17693998/free-photo-of-woman-in-saree-standing-in-front-of-a-temple.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Embroidered Kurta Set",
+      "description": "A beautifully embroidered kurta set that adds a touch of royalty to your look. Comes with matching pants.",
+      "price": 3199,
+      "discountPercentage": 25,
+      "rating": 4.8,
+      "stock": 10,
+      "brand": "UrbanChic",
+      "category": "kurtis",
+      "thumbnail": "https://curato.in/cdn/shop/products/1_993634cb-0e5d-41ee-ac41-4fb45b73bdaa_1024x1024.jpg?v=1663678999",
+      "images": [
+        "https://images.pexels.com/photos/10609383/pexels-photo-10609383.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Striped Jumpsuit",
+      "description": "A chic and modern striped jumpsuit, perfect for a smart-casual look.",
+      "price": 2599,
+      "discountPercentage": 20,
+      "rating": 4.4,
+      "stock": 15,
+      "brand": "StyleUp",
+      "category": "western",
+      "thumbnail": "https://www.alamodelabel.in/cdn/shop/files/0E81265D-23F5-410C-8D10-10581D5A6060.jpg?v=1749206446",
+      "images": [
+        "https://images.pexels.com/photos/2034336/pexels-photo-2034336.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Designer Lehenga Choli",
+      "description": "A stunning designer lehenga choli for weddings and grand celebrations. Features heavy embroidery.",
+      "price": 12999,
+      "discountPercentage": 10,
+      "rating": 4.9,
+      "stock": 4,
+      "brand": "RoyalSilks",
+      "category": "lehengas",
+      "thumbnail": "https://www.fabfunda.com/product-img/designer-sequin-work-red-lehen-1719036215.jpeg",
+      "images": [
+        "https://images.pexels.com/photos/11913988/pexels-photo-11913988.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Printed Chiffon Saree",
+      "description": "A lightweight and flowy printed chiffon saree, perfect for summer.",
+      "price": 1499,
+      "discountPercentage": 30,
+      "rating": 4.2,
+      "stock": 35,
+      "brand": "EthnicElegance",
+      "category": "sarees",
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZVpdx-eO5WdMne4lQ6dy12pGe2NmPVArJhg&s",
+      "images": [
+        "https://images.pexels.com/photos/9924535/pexels-photo-9924535.jpeg?auto=compress&cs=tinysrgb&w=600"
+      ]
+    },
+    {
+      "title": "Coat Pant Men's",
+      "brand": "Raymond",
+      "description": "Black suits for men can be a suitable outfit to upgrade your appearance on various occasions. While searching, you can find them in various fabrics, patterns, themes, fits, and other features. You can easily select the ones that match your preferences. ",
+      "price": 20000,
+      "stock": 10,
+      "category": "Coat Pant",
+      "thumbnail": "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWVuJTIwc3VpdHxlbnwwfHwwfHx8MA%3D%3D",
+      "discountPercentage": 25,
+      "rating": 4,
+      "images": [
+        "https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bWVuJTIwc3VpdHxlbnwwfHwwfHx8MA%3D%3D"
+      ],
+      "id": 16
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD746F5",
+      "customerName": "Priya ",
+      "date": "2025-07-20",
+      "totalAmount": 1599,
+      "status": "Processing",
+      "items": [
+        {
+          "productId": 2,
+          "title": "Modern Blue Kurti",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "ORD849B2",
+      "customerName": "Anbu",
+      "date": "2025-07-19",
+      "totalAmount": 10497,
+      "status": "Shipped",
+      "items": [
+        {
+          "productId": 4,
+          "title": "Classic Silk Saree",
+          "quantity": 1
+        },
+        {
+          "productId": 6,
+          "title": "Party Wear Gown",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "ORD911C7",
+      "customerName": "Ravi ",
+      "date": "2025-07-18",
+      "totalAmount": 4598,
+      "status": "Delivered",
+      "items": [
+        {
+          "productId": 10,
+          "title": "Bohemian Maxi Dress",
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "ORD153A9",
+      "customerName": "Deepan",
+      "date": "2025-07-21",
+      "totalAmount": 1299,
+      "status": "Pending",
+      "items": [
+        {
+          "productId": 3,
+          "title": "Casual Western Top",
+          "quantity": 1
+        }
+      ]
+    }
+  ]
+}

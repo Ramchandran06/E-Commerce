@@ -1,0 +1,179 @@
+.navbar-main-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.navbar-fullwidth-glass {
+  width: 100%;
+  padding: 15px 0;
+  background: rgba(28, 37, 65, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-title-large {
+  margin-left: -50px;
+  font-weight: 800;
+  font-size: 2rem;
+  color: #ffffff !important;
+  text-shadow: 0 0 15px rgba(0, 170, 255, 0.8);
+  transition: text-shadow 0.3s ease;
+}
+.brand-title-large:hover {
+  text-shadow: 0 0 25px rgba(0, 170, 255, 1);
+}
+
+.nav-link-pill,
+.user-dropdown .dropdown-toggle {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #e0e0e0 !important;
+  padding: 10px 15px !important;
+  margin-left:  8px;
+  border-radius: 50px;
+  background-color: transparent !important;
+  transition: all 0.3s ease;
+}
+
+.nav-link-pill:hover,
+.nav-link-pill.active {
+  color: #1c2541 !important;
+  background-color: white !important;
+}
+
+.nav-link-pill.dropdown:hover .dropdown-toggle,
+.nav-link-pill.dropdown.show .dropdown-toggle,
+.nav-link-pill.dropdown .active {
+  color: #1c2541 !important;
+  background-color: white !important;
+}
+
+#categories-dropdown{
+  color: #e0e0e0 !important;
+}
+#categories-dropdown:hover{
+  color: #1c2541 !important;
+}
+
+.nav-link-pill.dropdown-toggle::after,
+.user-dropdown .dropdown-toggle::after {
+  filter: invert(1);
+}
+.nav-link-pill:hover.dropdown-toggle::after,
+.nav-link-pill.show.dropdown-toggle::after {
+  filter: none;
+}
+@media (min-width: 992px) {
+  .nav-link-pill.dropdown:hover .dropdown-menu,
+  .user-dropdown.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 5px;
+  }
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+.search-input {
+  width: 0;
+  padding: 0 45px 0 20px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 21px;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  outline: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease-in-out;
+}
+.search-input.active {
+  width: 200px;
+  opacity: 1;
+  visibility: visible;
+}
+.search-icon-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.3s ease;
+}
+.search-icon-btn:hover {
+  color: rgb(3, 230, 247);
+}
+
+.icon-link {
+  font-size: 1.3rem;
+  color: #e0e0e0 !important;
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 8px !important;
+}
+.icon-link:hover {
+  color: #24c7f8 !important;
+  transform: scale(1.15);
+}
+
+.cart-icon-wrapper { position: relative; }
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.dropdown-menu {
+  background-color: rgba(30, 40, 50, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 15px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  margin-top: 15px !important;
+}
+.dropdown-item {
+  color: #e0e0e0 !important;
+}
+.dropdown-item:hover {
+  background-color: rgba(0, 170, 255, 0.2) !important;
+  color: white !important;
+}
+
+.user-dropdown .dropdown-toggle {
+  display: flex;
+  align-items: center;
+  color: #e0e0e0 !important;
+}
+.user-dropdown .dropdown-toggle:hover {
+  color: #24c7f8 !important;
+}
+
+.custom-toggler-icon .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.custom-toggler-icon:focus {
+  box-shadow: none;
+}
+
+@media (max-width: 991.98px) {
+  .brand-title-large {
+    margin-left: 0;
+    font-size: 1.5rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .navbar-toggler {
+    z-index: 5;
+  }
+}

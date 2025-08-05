@@ -1,0 +1,45 @@
+.checkout-form-card,
+.checkout-summary-card {
+  background: rgba(44, 62, 80, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.checkout-form-card .form-control {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+.checkout-form-card .form-control:focus {
+  background-color: rgb(248, 248, 248);
+  border-color: #00aaff;
+  box-shadow: none;
+}
+
+.checkout-form-card .form-control::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
+
+.payment-tabs .nav-link {
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #adb5bd !important;
+}
+.payment-tabs .nav-link.active {
+  background-color: #00aaff !important;
+  border-color: #00aaff !important;
+  color: white !important;
+}
+
+.summary-item-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}

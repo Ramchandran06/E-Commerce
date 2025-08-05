@@ -1,0 +1,38 @@
+.address-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.address-card p{
+    color:#383030 ;
+}
+
+
+
+.address-card .text-white-50 {
+  color: #f7f5f5 !important;
+}
+
+.address-card-actions {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.address-card-actions svg {
+  cursor: pointer;
+  color: #444343;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.address-card-actions svg:hover {
+  color: #1fbcfa;
+  transform: scale(1.1);
+}

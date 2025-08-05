@@ -1,0 +1,138 @@
+.deal-section {
+  background: linear-gradient(135deg, #2c3e50 0%, #466380 100%);
+  border-radius: 20px;
+  color: white;
+  overflow: hidden;
+}
+
+.deal-image-col {
+  padding: 0;
+}
+
+.deal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 500px;
+  transition: transform 0.3s ease;
+}
+.deal-image:hover{
+  transform: scale(1.05);
+}
+
+.deal-content-col {
+  display: flex;
+  align-items: center;
+}
+
+.deal-content {
+  padding: 40px;
+  
+}
+
+.deal-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.deal-description {
+  color: #ced4da;
+}
+.deal-price {
+  font-size: 2rem;
+}
+.deal-price .old-price {
+  font-size: 1.5rem;
+  opacity: 0.6;
+}
+.badge-deal{
+  height: 22px;
+  width: 150px;
+  font-size: 1.5rem;
+  font-weight: 200;
+  transition: transform 0.3s ease;
+}
+.badge-deal:hover{
+  background-color: red !important;
+  transform: scale(1.05);
+}
+
+/* Countdown Timer Styles */
+.countdown-container {
+  display: flex;
+  gap: 15px;
+  margin: 30px 0;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.countdown-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1; 
+  min-width: 70px;
+}
+.countdown-value {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.countdown-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+   letter-spacing: 1px;
+}
+.deal-button {
+  transition: all 0.3s ease;
+  background-color: #00aaff;
+  border: none;
+  padding: 12px 30px;
+  font-weight: bold;
+  border-radius: 50px;
+}
+
+.deal-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 170, 255, 0.4);
+  background-color: #0099e6;
+}
+.deal-image {
+    min-height: 100vh;
+    border-radius: 20px ;
+  }
+@media (max-width: 767.98px) {
+  .deal-section {
+    text-align: center;
+  }
+
+  .deal-image {
+    min-height: 300px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .deal-content {
+    padding: 30px 20px;
+    transition: transform 0.3s ease;
+  }
+  .deal-content:hover{
+    transform: scale(1.05);
+  }
+
+  .countdown-container {
+    justify-content: center;
+    gap: 10px; 
+  }
+
+  .deal-title {
+    font-size: 2rem;
+  }
+  
+}
+@media (max-width: 420px) {
+  .countdown-value {
+    font-size: 1.5rem; 
+  }
+  .countdown-box {
+    padding: 10px;
+    min-width: 60px;
+  }
+}
