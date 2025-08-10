@@ -47,9 +47,16 @@ const CategoryPage = () => {
         { params }
       );
 
-      setProducts(response.data.products);
-      setTotalPages(response.data.totalPages);
-      setTotalProducts(response.data.totalProducts);
+      const formattedProducts = response.data.products.map((product) => ({
+        ...product,
+        price: Number(product.price), 
+      }));
+
+      
+      setProducts(formattedProducts);
+
+       setTotalPages(response.data.totalPages);
+       setTotalProducts(response.data.totalProducts);
     } catch (err) {
       setError(`Failed to fetch products for "${categoryName}".`);
       console.error(err);

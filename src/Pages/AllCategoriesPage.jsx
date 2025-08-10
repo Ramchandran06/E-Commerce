@@ -15,7 +15,7 @@ const AllCategoriesPage = () => {
         setLoading(true);
 
         const response = await axios.get(
-          "http://localhost:5000/api/products/categories/all"
+          "https://e-commerce-backend-o93z.onrender.com/api/products/categories/all"
         );
 
         setCategoriesData(response.data);
