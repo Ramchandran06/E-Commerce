@@ -24,10 +24,16 @@ const ProductListPage = () => {
 
       const response = await axios.get("/api/products", { params });
 
-      setProducts(response.data.products);
-      setTotalPages(response.data.totalPages);
-      setTotalProducts(response.data.totalProducts);
+        const formattedProducts = response.data.products.map((product) => ({
+          ...product,
+          price: Number(product.price), 
+        }));
+         setProducts(formattedProducts);
+
+       setTotalPages(response.data.totalPages);
+        setTotalProducts(response.data.totalProducts);
     } catch (err) {
+      console.error("Error fetching products:", err);
       setError("Could not load products. Please try again later.");
     } finally {
       setLoading(false);
