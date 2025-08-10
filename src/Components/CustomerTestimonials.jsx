@@ -18,8 +18,8 @@ const CustomerTestimonials = () => {
       try {
         setLoading(true);
         const response = await axios.get("/api/reviews/featured");
-
         const data = response.data;
+
         if (data.length > 0 && data.length < 6) {
           setReviews([...data, ...data]);
         } else {
@@ -51,7 +51,6 @@ const CustomerTestimonials = () => {
   return (
     <section className="testimonials-section">
       <Container fluid>
-        {" "}
         <h2 className="text-center mb-5 fw-bold text-white">
           What Our Customers Say
         </h2>
@@ -70,13 +69,13 @@ const CustomerTestimonials = () => {
           className="testimonial-swiper-marquee"
         >
           {reviews.map((review, index) => (
-            <SwiperSlide key={`${review.ReviewID}-${index}`}>
-              <div className="testimonial-card">
-                {review.ProfilePictureURL ? (
+            <SwiperSlide key={`${review.reviewid}-${index}`}>
+              <div className="testimonial-card ">
+                {review.profilepictureurl ? (
                   <img
-                    src={review.ProfilePictureURL}
-                    alt={review.FullName}
-                    className="testimonial-avatar"
+                    src={review.profilepictureurl}
+                    alt={review.fullname}
+                    className="testimonial-avatar "
                   />
                 ) : (
                   <FaUserCircle size={70} className="testimonial-avatar-icon" />
@@ -85,14 +84,14 @@ const CustomerTestimonials = () => {
                   {[...Array(5)].map((_, i) => (
                     <FaStar
                       key={i}
-                      color={i < review.Rating ? "#ffc107" : "#e4e5e9"}
+                      color={i < review.rating ? "#ffc107" : "#e4e5e9"}
                     />
                   ))}
                 </div>
-                <p className="testimonial-quote">"{review.Comment}"</p>
-                <h5 className="testimonial-name">{review.FullName}</h5>
+                <p className="testimonial-quote">"{review.comment}"</p>{" "}
+                <h5 className="testimonial-name">{review.fullname}</h5>{" "}
                 <p className="testimonial-product-name">
-                  on {review.ProductName}
+                  on {review.productname}
                 </p>
               </div>
             </SwiperSlide>

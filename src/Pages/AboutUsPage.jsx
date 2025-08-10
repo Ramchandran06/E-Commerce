@@ -7,7 +7,7 @@ import "animate.css";
 const AboutUsPage = () => {
   return (
     <>
-      {/* Banner Section */}
+     
       <div className="about-header-banner">
         <div className="about-banner-content animate__animated animate__fadeIn">
           <h1 className="display-3 fw-bold">Our Story</h1>
@@ -16,7 +16,7 @@ const AboutUsPage = () => {
       </div>
 
       <Container className="my-5 py-5 text-white">
-        {/*  Mission Section */}
+      
         <Row className="align-items-center about-section gy-4">
           <Col md={6} className="animate__animated animate__fadeInLeft">
             <Image
@@ -96,7 +96,7 @@ const AboutUsPage = () => {
           </Row>
         </div>
 
-        {/*Team Section */}
+    
         <div className="text-center about-section">
           <h2 className="mb-5">Meet The Founders</h2>
           <Row>

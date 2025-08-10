@@ -36,11 +36,7 @@ ChartJS.register(
 import "./DashboardPage.css";
 
 const DashboardPage = () => {
-  const [stats, setStats] = useState({
-    totalSales: 0,
-    totalOrders: 0,
-    totalProducts: 0,
-  });
+  const [stats, setStats] = useState(null);
   const [recentOrders, setRecentOrders] = useState([]);
   const [salesData, setSalesData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -65,7 +61,7 @@ const DashboardPage = () => {
           month: "short",
         })
       );
-      const chartValues = salesRes.data.map((d) => d.totalSales);
+      const chartValues = salesRes.data.map((d) => d.totalsales);
       setSalesData({
         labels: chartLabels,
         datasets: [
@@ -95,7 +91,7 @@ const DashboardPage = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Chart Options
+
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -109,13 +105,14 @@ const DashboardPage = () => {
         grid: { color: "rgba(255, 255, 255, 0.1)" },
       },
       y: {
+        beginAtZero: true ,
         ticks: { color: "#adb5bd" },
         grid: { color: "rgba(255, 255, 255, 0.1)" },
       },
     },
   };
 
-  if (loading)
+  if (loading || !stats)
     return (
       <div className="text-center py-5">
         <Spinner animation="border" variant="light" />
@@ -139,7 +136,7 @@ const DashboardPage = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   <div>
                     <h4>Total Sales</h4>
-                    <h2>₹{stats.totalSales.toLocaleString("en-IN")}</h2>
+                    <h2>₹{typeof stats.totalsales.toLocaleString("en-IN")}</h2>
                   </div>
                   <FaRupeeSign size={40} opacity={0.5} />
                 </div>
@@ -154,7 +151,7 @@ const DashboardPage = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   <div>
                     <h4>Total Orders</h4>
-                    <h2>{stats.totalOrders}</h2>
+                    <h2>{stats.totalorders}</h2>
                   </div>
                   <FaShoppingCart size={40} opacity={0.5} />
                 </div>
@@ -169,7 +166,7 @@ const DashboardPage = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   <div>
                     <h4>Total Products</h4>
-                    <h2>{stats.totalProducts}</h2>
+                    <h2>{stats.totalproducts}</h2>
                   </div>
                   <FaBoxOpen size={40} opacity={0.5} />
                 </div>
@@ -200,20 +197,23 @@ const DashboardPage = () => {
                 <ListGroup variant="flush">
                   {recentOrders.map((order) => (
                     <ListGroup.Item
-                      key={order.OrderID}
+                      key={order.orderid}
                       className="bg-dark text-white d-flex justify-content-between align-items-center px-0"
                     >
                       <div>
                         <Link to="/admin/orders" className="dashboard-link">
-                          Order #{order.OrderID}
+                          Order #{order.orderid}
                         </Link>
                         <br />
                         <small className="text-muted">
-                          by {order.Username}
+                          by {order.username}
                         </small>
                       </div>
                       <Badge bg="secondary" pill>
-                        ₹{Number(order.TotalPrice).toLocaleString("en-IN")}
+                        ₹
+                        {typeof order.totalprice === "number"
+                          ? order.totalprice.toLocaleString("en-IN")
+                          : "N/A"}
                       </Badge>
                     </ListGroup.Item>
                   ))}

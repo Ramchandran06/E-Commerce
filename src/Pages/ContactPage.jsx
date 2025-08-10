@@ -202,9 +202,9 @@ const ContactPage = () => {
             {!faqLoading && !faqError && faqs.length > 0 && (
               <Accordion defaultActiveKey="0" flush className="faq-accordion">
                 {faqs.map((faq, index) => (
-                  <Accordion.Item key={faq.FAQID} eventKey={String(index)}>
-                    <Accordion.Header>{faq.Question}</Accordion.Header>
-                    <Accordion.Body>{faq.Answer}</Accordion.Body>
+                  <Accordion.Item key={faq.faqid} eventKey={String(index)}>
+                    <Accordion.Header>{faq.question}</Accordion.Header>
+                    <Accordion.Body>{faq.answer}</Accordion.Body>
                   </Accordion.Item>
                 ))}
               </Accordion>

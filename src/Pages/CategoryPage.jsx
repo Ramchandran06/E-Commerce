@@ -95,7 +95,9 @@ const CategoryPage = () => {
         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/products" }}>
           Products
         </Breadcrumb.Item>
-        <Breadcrumb.Item className="text-secondary" active>{pageTitle}</Breadcrumb.Item>
+        <Breadcrumb.Item className="text-secondary" active>
+          {pageTitle}
+        </Breadcrumb.Item>
       </Breadcrumb>
 
       <Row className="mt-4">
@@ -103,7 +105,7 @@ const CategoryPage = () => {
           <FilterSidebar
             onFilterChange={handleFilterChange}
             onClearFilters={handleClearFilters}
-            disableCategoryFilter={true} 
+            disableCategoryFilter={true}
           />
         </Col>
 
@@ -138,7 +140,7 @@ const CategoryPage = () => {
               <Row xs={1} sm={2} md={3} className="g-4">
                 {products.length > 0 ? (
                   products.map((product) => (
-                    <Col key={product.ProductID}>
+                    <Col key={product.productid}>
                       <ProductCard product={product} />
                     </Col>
                   ))

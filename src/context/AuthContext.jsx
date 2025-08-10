@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     return response.data;
   };
 
-  // Logout function
+
 
   const logout = () => {
     console.log("[AuthContext] Logging out user.");
@@ -95,6 +95,7 @@ export const AuthProvider = ({ children }) => {
     updateUserProfile,
     changePassword,
     manuallyUpdateUser,
+    setUser
   };
 
   return (

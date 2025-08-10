@@ -27,6 +27,7 @@ const NewArrivals = () => {
   useEffect(() => {
     const fetchNewArrivals = async () => {
       try {
+        
         const response = await axios.get("/api/products/new-arrivals");
         setNewArrivals(response.data);
       } catch (err) {
@@ -45,7 +46,6 @@ const NewArrivals = () => {
     addToCart(product);
   };
 
-  // Loading
   if (loading) {
     return (
       <div className="text-center">
@@ -55,12 +55,14 @@ const NewArrivals = () => {
     );
   }
 
+  
   if (error) {
     return <Alert variant="warning">{error}</Alert>;
   }
 
-  if (newArrivals.length === 0) {
-    return null;
+
+  if (!newArrivals || newArrivals.length === 0) {
+    return null; 
   }
 
   return (
@@ -90,17 +92,22 @@ const NewArrivals = () => {
         className="mySwiper"
       >
         {newArrivals.map((product) => (
-          <SwiperSlide key={product.ProductID}>
-            
+          <SwiperSlide key={product.productid}>
+            {" "}
             <div className="arrival-card">
-              <img src={product.Thumbnail} alt={product.Name} />
+              <img src={product.thumbnail} alt={product.name} />{" "}
               <div className="arrival-overlay">
-                <h5 className="arrival-title">{product.Name}</h5>
+                <h5 className="arrival-title">{product.name}</h5>{" "}
                 <p className="arrival-price">
-                  ₹{product.Price.toLocaleString("en-IN")}
-                </p>
+                  {
+                    typeof product.price === "number"
+                      ? `₹${product.price.toLocaleString("en-IN")}`
+                      : "Price upon request" 
+                  }
+                </p>{" "}
                 <div className="arrival-buttons">
-                  <Link to={`/product/${product.ProductID}`}>
+                  <Link to={`/product/${product.productid}`}>
+                    {" "}
                     <Button variant="outline-light" size="sm">
                       View
                     </Button>

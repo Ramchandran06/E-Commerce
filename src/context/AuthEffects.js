@@ -6,7 +6,6 @@ const AuthEffects = () => {
   const { user } = useAuth();
   const { fetchWishlist, clearWishlist } = useWishlist();
 
-  // இந்த console.log மிக மிக முக்கியம். இது வந்தே ஆக வேண்டும்.
   console.log("[AuthEffects] THIS COMPONENT IS NOW RUNNING!");
 
   useEffect(() => {

@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import axios from "axios"; 
+import axios from "axios";
 
 const AddProductPage = () => {
   const navigate = useNavigate();
   const [productData, setProductData] = useState({
-    Name: "",
-    Brand: "",
-    Description: "",
-    Price: "",
-    Stock: "",
-    Category: "",
-    Thumbnail: "",
+    name: "",
+    brand: "",
+    description: "",
+    price: "",
+    stock: "",
+    category: "",
+    thumbnail: "",
   });
 
   const handleInputChange = (e) => {
@@ -24,15 +24,34 @@ const AddProductPage = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
+    const payload = {
+      Name: productData.name,
+      Brand: productData.brand,
+      Description: productData.description,
+      Price: Number(productData.price),
+      Stock: Number(productData.stock),
+      Category: productData.category,
+      Thumbnail: productData.thumbnail,
+      ImagesJSON: JSON.stringify([productData.thumbnail]),
+    };
+
     const newProduct = {
       ...productData,
-      Price: Number(productData.Price),
-      Stock: Number(productData.Stock),
-      ImagesJSON: JSON.stringify([productData.Thumbnail]), 
+      price: Number(productData.price),
+      stock: Number(productData.stock),
+      ImagesJSON: JSON.stringify([productData.thumbnail]),
     };
 
     try {
-      await axios.post("/api/products", newProduct); 
+      const token = localStorage.getItem("token");
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      await axios.post("/api/products", payload, config);
       toast.success("Product added successfully!");
       navigate("/admin/products");
     } catch (err) {
@@ -50,8 +69,8 @@ const AddProductPage = () => {
               <Form.Label>Product Name</Form.Label>
               <Form.Control
                 type="text"
-                name="Name"
-                value={productData.Name}
+                name="name"
+                value={productData.name}
                 onChange={handleInputChange}
                 required
               />
@@ -62,8 +81,8 @@ const AddProductPage = () => {
               <Form.Label>Brand</Form.Label>
               <Form.Control
                 type="text"
-                name="Brand"
-                value={productData.Brand}
+                name="brand"
+                value={productData.brand}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -74,8 +93,8 @@ const AddProductPage = () => {
           <Form.Control
             as="textarea"
             rows={3}
-            name="Description"
-            value={productData.Description}
+            name="description"
+            value={productData.description}
             onChange={handleInputChange}
           />
         </Form.Group>
@@ -85,8 +104,8 @@ const AddProductPage = () => {
               <Form.Label>Price</Form.Label>
               <Form.Control
                 type="number"
-                name="Price"
-                value={productData.Price}
+                name="price"
+                value={productData.price}
                 onChange={handleInputChange}
                 required
               />
@@ -97,8 +116,8 @@ const AddProductPage = () => {
               <Form.Label>Stock</Form.Label>
               <Form.Control
                 type="number"
-                name="Stock"
-                value={productData.Stock}
+                name="stock"
+                value={productData.stock}
                 onChange={handleInputChange}
                 required
               />
@@ -109,8 +128,8 @@ const AddProductPage = () => {
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type="text"
-                name="Category"
-                value={productData.Category}
+                name="category"
+                value={productData.category}
                 onChange={handleInputChange}
                 required
               />
@@ -121,8 +140,8 @@ const AddProductPage = () => {
           <Form.Label>Thumbnail Image URL</Form.Label>
           <Form.Control
             type="text"
-            name="Thumbnail"
-            value={productData.Thumbnail}
+            name="thumbnail"
+            value={productData.thumbnail}
             onChange={handleInputChange}
             required
           />

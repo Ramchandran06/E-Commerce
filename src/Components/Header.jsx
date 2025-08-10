@@ -19,14 +19,10 @@ import "./Header.css";
 const Header = ({ handleProfileOpen }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const { cartItems } = useCart();
+  const { cartCount } = useCart();
   const { wishlistItems } = useWishlist();
   const location = useLocation();
   const [expanded, setExpanded] = useState(false);
-  const totalItemsInCart = cartItems.reduce(
-    (total, item) => total + item.qty,
-    0
-  );
 
   const handleLogout = () => {
     logout();
@@ -50,7 +46,7 @@ const Header = ({ handleProfileOpen }) => {
       >
         <Container>
           <LinkContainer to="/" onClick={closeMenu}>
-            <Navbar.Brand className="brand-title-large ">
+            <Navbar.Brand className="brand-title-large  ">
               SIT Dress Shop
             </Navbar.Brand>
           </LinkContainer>
@@ -106,9 +102,9 @@ const Header = ({ handleProfileOpen }) => {
                 <Nav.Link className="icon-link">
                   <div className="cart-icon-wrapper">
                     <FaShoppingCart />
-                    {totalItemsInCart > 0 && (
+                    {cartCount > 0 && (
                       <Badge pill bg="primary" className="cart-badge">
-                        {totalItemsInCart}
+                        {cartCount}
                       </Badge>
                     )}
                   </div>
@@ -131,8 +127,8 @@ const Header = ({ handleProfileOpen }) => {
                 <NavDropdown
                   title={
                     <>
-                      <FaUser className="ms-4 me-2" />
-                      {user.FullName?.split(" ")[0]}
+                      <FaUser className="ms-10 " />
+                      {user.fullname?.split(" ")[0]}
                     </>
                   }
                   id="user-dropdown"
@@ -149,7 +145,7 @@ const Header = ({ handleProfileOpen }) => {
                   <LinkContainer to="/my-orders" onClick={closeMenu}>
                     <NavDropdown.Item>My Orders</NavDropdown.Item>
                   </LinkContainer>
-                  {user.Role === "admin" && (
+                  {user.role === "admin" && (
                     <LinkContainer to="/admin" onClick={closeMenu}>
                       <NavDropdown.Item>Admin Panel</NavDropdown.Item>
                     </LinkContainer>

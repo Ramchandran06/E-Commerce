@@ -72,7 +72,7 @@ const ProductEditPage = () => {
 
   return (
     <div className="text-white">
-      <h1 className="mb-4">Edit Product: {product.Name}</h1>
+      <h1 className="mb-4">Edit Product: {product.name}</h1>
       <Form onSubmit={submitHandler}>
         <Row>
           <Col md={6}>
@@ -80,8 +80,8 @@ const ProductEditPage = () => {
               <Form.Label>Product Name</Form.Label>
               <Form.Control
                 type="text"
-                name="Name"
-                value={product.Name || ""}
+                name="name"
+                value={product.name || ""}
                 onChange={handleInputChange}
                 required
               />
@@ -92,8 +92,8 @@ const ProductEditPage = () => {
               <Form.Label>Brand</Form.Label>
               <Form.Control
                 type="text"
-                name="Brand"
-                value={product.Brand || ""}
+                name="brand"
+                value={product.brand || ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -105,8 +105,8 @@ const ProductEditPage = () => {
           <Form.Control
             as="textarea"
             rows={3}
-            name="Description"
-            value={product.Description || ""}
+            name="description"
+            value={product.description || ""}
             onChange={handleInputChange}
           />
         </Form.Group>
@@ -118,8 +118,8 @@ const ProductEditPage = () => {
               <Form.Control
                 type="number"
                 step="0.01"
-                name="Price"
-                value={product.Price || ""}
+                name="price"
+                value={product.price || ""}
                 onChange={handleInputChange}
                 required
               />
@@ -131,7 +131,7 @@ const ProductEditPage = () => {
               <Form.Control
                 type="number"
                 name="Stock"
-                value={product.Stock || ""}
+                value={product.stock || ""}
                 onChange={handleInputChange}
                 required
               />
@@ -142,8 +142,8 @@ const ProductEditPage = () => {
               <Form.Label>Category</Form.Label>
               <Form.Control
                 type="text"
-                name="Category"
-                value={product.Category || ""}
+                name="category"
+                value={product.category || ""}
                 onChange={handleInputChange}
                 required
               />
@@ -154,8 +154,8 @@ const ProductEditPage = () => {
               <Form.Label>Discount (%)</Form.Label>
               <Form.Control
                 type="number"
-                name="DiscountPercentage"
-                value={product.DiscountPercentage || 0}
+                name="discountpercentage"
+                value={product.discountpercentage || 0}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -166,14 +166,12 @@ const ProductEditPage = () => {
           <Form.Label>Thumbnail Image URL</Form.Label>
           <Form.Control
             type="text"
-            name="Thumbnail"
-            value={product.Thumbnail || ""}
+            name="thumbnail"
+            value={product.thumbnail || ""}
             onChange={handleInputChange}
             required
           />
         </Form.Group>
-
-        {/* ImagesJSON-ஐ மாற்ற வேண்டுமானால், அதற்கும் ஒரு input சேர்க்கலாம். இப்போதைக்கு இதை விட்டுவிடுகிறேன். */}
 
         <Button variant="primary" type="submit">
           Update Product

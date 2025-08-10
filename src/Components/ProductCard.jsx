@@ -11,25 +11,26 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const { wishlistItems, toggleWishlistItem } = useWishlist();
 
-  if (!product) {
+  if (!product || typeof product.price !== "number") {
+    
     return null;
   }
 
-  const price = Number(product.Price) || 0;
-  const discount = Number(product.DiscountPercentage) || 0;
+  const price = product.price;
+  const discount = Number(product.discountpercentage) || 0;
 
-  const avgRating = Number(product.AvgRating) || 0;
-  const reviewCount = Number(product.ReviewCount) || 0;
+  const avgRating = Number(product.avgrating) || 0;
+  const reviewCount = Number(product.reviewcount) || 0;
 
   const newPrice = Math.round(price * (1 - discount / 100));
 
   const isWishlisted = wishlistItems.some(
-    (item) => item.ProductID === product.ProductID
+    (item) => item.productid === product.productid
   );
 
   const handleToggleWishlist = (e) => {
     e.stopPropagation();
-    toggleWishlistItem(product.ProductID);
+    toggleWishlistItem(product.productid);
   };
 
   const handleBuyNow = (e) => {
@@ -72,18 +73,18 @@ const ProductCard = ({ product }) => {
           {isWishlisted ? <FaHeart /> : <FaRegHeart />}
         </div>
 
-        <Link to={`/product/${product.ProductID}`}>
+        <Link to={`/product/${product.productid}`}>
           <img
-            src={product.Thumbnail}
-            alt={product.Name}
+            src={product.thumbnail}
+            alt={product.name}
             className="product-img"
           />
         </Link>
       </div>
 
       <div className="product-info">
-        <Link to={`/product/${product.ProductID}`} className="product-title">
-          {product.Name}
+        <Link to={`/product/${product.productid}`} className="product-title">
+          {product.name}
         </Link>
 
         <div
@@ -92,7 +93,6 @@ const ProductCard = ({ product }) => {
         >
           {reviewCount > 0 ? (
             <>
-              
               {renderStars(avgRating)}
               <span
                 className="ms-2 text-white-50"
@@ -103,7 +103,7 @@ const ProductCard = ({ product }) => {
             </>
           ) : (
             <span
-              className="text-muted"
+              className="text-secondary"
               style={{ fontSize: "0.8rem", fontStyle: "italic" }}
             >
               No reviews yet

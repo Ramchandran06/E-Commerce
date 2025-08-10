@@ -13,33 +13,32 @@ import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import ReactPaginate from "react-paginate"; // Pagination-ஐ import செய்யவும்
+import ReactPaginate from "react-paginate"; 
 
 const ProductListPageAdmin = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Pagination state-கள்
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
-  // Modal state-கள்
+
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // API-லிருந்து தரவைப் பெறும் function
   const fetchProducts = async () => {
     try {
       setLoading(true);
       setError(null);
 
-      // Pagination-க்கான parameters-ஐ அனுப்பவும்
+    
       const response = await axios.get("/api/products", {
-        params: { page: currentPage, limit: 10 }, // ஒரு பக்கத்திற்கு 10 பொருட்கள்
+        params: { page: currentPage, limit: 10 }, 
       });
 
-      // response.data-வில் இருந்து products array-ஐ எடுக்கவும்
+
       setProducts(response.data.products);
       setTotalPages(response.data.totalPages);
     } catch (err) {
@@ -50,18 +49,18 @@ const ProductListPageAdmin = () => {
     }
   };
 
-  // currentPage மாறும்போது, மீண்டும் fetch செய்யவும்
+ 
   useEffect(() => {
     fetchProducts();
   }, [currentPage]);
 
-  // ஒரு பொருளை நீக்கும் function
+
   const handleDelete = async (id, name) => {
     if (window.confirm(`Are you sure you want to delete "${name}"?`)) {
       try {
         await axios.delete(`/api/products/${id}`);
         toast.success(`Product "${name}" deleted successfully!`);
-        // முதல் பக்கத்திற்குத் திரும்பி, பட்டியலைப் புதுப்பிக்கவும்
+        
         if (currentPage !== 1) {
           setCurrentPage(1);
         } else {
@@ -73,7 +72,7 @@ const ProductListPageAdmin = () => {
     }
   };
 
-  // பயனர் ஒரு பக்க எண்ணை கிளிக் செய்யும்போது
+
   const handlePageClick = (event) => {
     setCurrentPage(event.selected + 1);
   };
@@ -99,24 +98,26 @@ const ProductListPageAdmin = () => {
       </div>
 
       <Table striped bordered hover variant="dark" responsive>
-        {/* ... Table Header ... */}
         <tbody>
           {products.map((product) => (
-            <tr key={product.ProductID}>
-              <td>{product.ProductID}</td>
+            <tr key={product.productid}>
+              <td>{product.productid}</td>
               <td>
                 <Image
-                  src={product.Thumbnail}
-                  alt={product.Name}
+                  src={product.thumbnail}
+                  alt={product.name}
                   style={{ width: "50px" }}
                   rounded
                 />
               </td>
-              <td>{product.Name}</td>
+              <td>{product.name}</td>
               <td>
-                ₹{product.Price ? product.Price.toLocaleString("en-IN") : "N/A"}
+                ₹
+                {typeof product.price === "number"
+                  ? product.price.toLocaleString("en-IN")
+                  : "N/A"}
               </td>
-              <td>{product.Stock}</td>
+              <td>{product.stock}</td>
               <td>
                 <Button
                   variant="info"
@@ -126,7 +127,7 @@ const ProductListPageAdmin = () => {
                 >
                   <FaEye />
                 </Button>
-                <Link to={`/admin/product/${product.ProductID}/edit`}>
+                <Link to={`/admin/product/${product.productid}/edit`}>
                   <Button variant="warning" size="sm" className="me-2">
                     <FaEdit />
                   </Button>
@@ -134,7 +135,7 @@ const ProductListPageAdmin = () => {
                 <Button
                   variant="danger"
                   size="sm"
-                  onClick={() => handleDelete(product.ProductID, product.Name)}
+                  onClick={() => handleDelete(product.productid, product.name)}
                 >
                   <FaTrash />
                 </Button>
@@ -144,7 +145,6 @@ const ProductListPageAdmin = () => {
         </tbody>
       </Table>
 
-      {/* Pagination Component */}
       {totalPages > 1 && (
         <div className="d-flex justify-content-center mt-4">
           <ReactPaginate
@@ -170,34 +170,33 @@ const ProductListPageAdmin = () => {
         </div>
       )}
 
-      {/* View Product Modal */}
       {selectedProduct && (
         <Modal show={!!selectedProduct} onHide={handleClose} centered size="lg">
           <Modal.Header closeButton className="bg-dark text-white">
-            <Modal.Title>{selectedProduct.Name}</Modal.Title>
+            <Modal.Title>{selectedProduct.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body className="bg-dark text-white">
             <Row>
               <Col md={4}>
-                <Image src={selectedProduct.Thumbnail} fluid rounded />
+                <Image src={selectedProduct.thumbnail} fluid rounded />
               </Col>
               <Col md={8}>
                 <h4>Description</h4>
-                <p>{selectedProduct.Description}</p>
+                <p>{selectedProduct.description}</p>
                 <hr />
                 <p>
-                  <strong>Category:</strong> {selectedProduct.Category}
+                  <strong>Category:</strong> {selectedProduct.category}
                 </p>
                 <p>
-                  <strong>Brand:</strong> {selectedProduct.Brand}
+                  <strong>Brand:</strong> {selectedProduct.brand}
                 </p>
                 <p>
-                  <strong>Stock:</strong> {selectedProduct.Stock} units
+                  <strong>Stock:</strong> {selectedProduct.stock} units
                 </p>
                 <p>
                   <strong>Price:</strong> ₹
-                  {selectedProduct.Price
-                    ? selectedProduct.Price.toLocaleString("en-IN")
+                  {selectedProduct.price
+                    ? selectedProduct.price.toLocaleString("en-IN")
                     : "N/A"}
                 </p>
               </Col>

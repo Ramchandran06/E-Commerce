@@ -9,7 +9,8 @@ import { WishlistProvider } from "./context/WishlistContext";
 import { CartProvider } from "./context/CartContext.jsx";
 import AuthEffects from "./context/AuthEffects";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
 
 const token = localStorage.getItem("token");
 if (token) {

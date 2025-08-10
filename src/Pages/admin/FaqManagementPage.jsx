@@ -12,16 +12,18 @@ const FaqManagementPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [currentFaq, setCurrentFaq] = useState({
-    Question: "",
-    Answer: "",
-    IsActive: true,
-    DisplayOrder: 0,
+    question: "",
+    answer: "",
+    isActive: true,
+    displayOrder: 0,
   });
 
   const fetchFaqs = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("/api/faq/admin/all");
+      const token = localStorage.getItem("token");
+      const config = { headers: { Authorization: `Bearer ${token}` } };
+      const response = await axios.get("/api/faq/admin/all", config);
       setFaqs(response.data);
     } catch (err) {
       setError("Failed to fetch FAQs.");
@@ -41,10 +43,10 @@ const FaqManagementPage = () => {
     } else {
       setIsEditing(false);
       setCurrentFaq({
-        Question: "",
-        Answer: "",
-        IsActive: true,
-        DisplayOrder: faqs.length + 1,
+        question: "",
+        answer: "",
+        isActive: true,
+        displayOrder: faqs.length + 1,
       });
     }
     setShowModal(true);
@@ -62,9 +64,23 @@ const FaqManagementPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return toast.error("Authentication required. Please log in again.");
+    }
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const payload = {
+      Question: currentFaq.question,
+      Answer: currentFaq.answer,
+      IsActive: currentFaq.isActive,
+      DisplayOrder: Number(currentFaq.displayOrder),
+    };
     const apiCall = isEditing
-      ? axios.put(`/api/faq/${currentFaq.FAQID}`, currentFaq)
-      : axios.post("/api/faq", currentFaq);
+      ? axios.put(`/api/faq/${currentFaq.faqid}`, payload, config)
+      : axios.post("/api/faq", payload, config);
 
     try {
       const response = await apiCall;
@@ -79,7 +95,10 @@ const FaqManagementPage = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this FAQ?")) {
       try {
-        const response = await axios.delete(`/api/faq/${id}`);
+        const token = localStorage.getItem("token");
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+
+        const response = await axios.delete(`/api/faq/${id}`, config);
         toast.success(response.data.message);
         fetchFaqs();
       } catch (err) {
@@ -115,10 +134,10 @@ const FaqManagementPage = () => {
         </thead>
         <tbody>
           {faqs.map((faq) => (
-            <tr key={faq.FAQID}>
-              <td>{faq.Question}</td>
-              <td>{faq.IsActive ? "Active" : "Inactive"}</td>
-              <td>{faq.DisplayOrder}</td>
+            <tr key={faq.faqid}>
+              <td>{faq.question}</td>
+              <td>{faq.isActive ? "Active" : "Inactive"}</td>
+              <td>{faq.displayOrder}</td>
               <td>
                 <Button
                   variant="warning"
@@ -131,7 +150,7 @@ const FaqManagementPage = () => {
                 <Button
                   variant="danger"
                   size="sm"
-                  onClick={() => handleDelete(faq.FAQID)}
+                  onClick={() => handleDelete(faq.faqid)}
                 >
                   <FaTrash />
                 </Button>
@@ -152,8 +171,8 @@ const FaqManagementPage = () => {
               <Form.Label>Question</Form.Label>
               <Form.Control
                 type="text"
-                name="Question"
-                value={currentFaq.Question}
+                name="question"
+                value={currentFaq.question}
                 onChange={handleInputChange}
                 required
               />
@@ -163,8 +182,8 @@ const FaqManagementPage = () => {
               <Form.Control
                 as="textarea"
                 rows={5}
-                name="Answer"
-                value={currentFaq.Answer}
+                name="answer"
+                value={currentFaq.answer}
                 onChange={handleInputChange}
                 required
               />
@@ -173,17 +192,17 @@ const FaqManagementPage = () => {
               <Form.Label>Display Order</Form.Label>
               <Form.Control
                 type="number"
-                name="DisplayOrder"
-                value={currentFaq.DisplayOrder}
+                name="displayOrder"
+                value={currentFaq.displayOrder}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Check
               type="switch"
               id="is-active-switch"
-              name="IsActive"
+              name="isActive"
               label="Is Active"
-              checked={currentFaq.IsActive}
+              checked={currentFaq.isActive}
               onChange={handleInputChange}
             />
           </Modal.Body>

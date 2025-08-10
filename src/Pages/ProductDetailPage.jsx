@@ -24,7 +24,7 @@ import toast from "react-hot-toast";
 import "animate.css";
 import "./ProductDetailPage.css";
 
-// ReviewsTab
+
 const ReviewsTab = ({ productId, onReviewsLoad }) => {
   const { user } = useAuth();
   const [reviews, setReviews] = useState([]);
@@ -78,28 +78,28 @@ const ReviewsTab = ({ productId, onReviewsLoad }) => {
       ) : reviews.length > 0 ? (
         reviews.map((review) => (
           <Card
-            key={review.ReviewID}
+            key={review.reviewid}
             className="bg-transparent border-secondary mb-3"
           >
             <Card.Body>
               <div className="d-flex justify-content-between">
                 <Card.Title className="text-white">
-                  {review.FullName}
+                  {review.fullname}
                 </Card.Title>
                 <div>
                   {[...Array(5)].map((_, i) => (
                     <FaStar
                       key={i}
-                      color={i < review.Rating ? "#ffc107" : "#444"}
+                      color={i < review.rating ? "#ffc107" : "#444"}
                     />
                   ))}
                 </div>
               </div>
               <Card.Text className="text-white-50 mt-2">
-                {review.Comment}
+                {review.comment}
               </Card.Text>
               <Card.Footer className="text-secondary bg-transparent border-0 px-0 pt-2">
-                {new Date(review.CreatedAt).toLocaleDateString()}
+                {new Date(review.createdat).toLocaleDateString()}
               </Card.Footer>
             </Card.Body>
           </Card>
@@ -115,6 +115,7 @@ const ReviewsTab = ({ productId, onReviewsLoad }) => {
             className="my-4"
           />
           <h5 className="text-white">Write a Review</h5>
+
           <Form onSubmit={handleReviewSubmit}>
             <Form.Group className="mb-3 text-start">
               <Form.Label>Your Rating</Form.Label>
@@ -124,12 +125,16 @@ const ReviewsTab = ({ productId, onReviewsLoad }) => {
                     key={i}
                     size={24}
                     className="me-1 star-rating"
-                    style={{ color: i < rating ? "#ffc107" : "#e4e5e9" }}
+                    style={{
+                      color: i < rating ? "#ffc107" : "#e4e5e9",
+                      cursor: "pointer",
+                    }}
                     onClick={() => setRating(i + 1)}
                   />
                 ))}
               </div>
             </Form.Group>
+
             <Form.Group className="mb-3 text-start">
               <Form.Label>Your Review</Form.Label>
               <Form.Control
@@ -141,6 +146,7 @@ const ReviewsTab = ({ productId, onReviewsLoad }) => {
                 onChange={(e) => setComment(e.target.value)}
               />
             </Form.Group>
+
             <Button variant="primary" type="submit" disabled={isSubmitting}>
               {isSubmitting ? <Spinner as="span" size="sm" /> : "Submit Review"}
             </Button>
@@ -151,12 +157,10 @@ const ReviewsTab = ({ productId, onReviewsLoad }) => {
   );
 };
 
-// Main ProductDetailPage
 const ProductDetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -170,7 +174,8 @@ const ProductDetailPage = () => {
         setLoading(true);
         const response = await axios.get(`/api/products/${id}`);
         setProduct(response.data);
-        setSelectedImage(response.data.Thumbnail);
+        // --- CHANGE HERE ---
+        setSelectedImage(response.data.thumbnail);
       } catch (err) {
         setError("Product not found or an error occurred.");
       } finally {
@@ -195,15 +200,14 @@ const ProductDetailPage = () => {
       </Container>
     );
 
-  const price = Number(product.Price) || 0;
-  const discount = Number(product.DiscountPercentage) || 0;
-  const stock = Number(product.Stock) || 0;
+  const price = Number(product.price) || 0;
+  const discount = Number(product.discountpercentage) || 0;
+  const stock = Number(product.stock) || 0;
+  const averageRating = Number(product.rating) || 0;
 
-  const averageRating = Number(product.Rating) || 0;
-
-  const imageGallery = product.ImagesJSON
-    ? JSON.parse(product.ImagesJSON)
-    : [product.Thumbnail];
+  const imageGallery = product.imagesjson
+    ? JSON.parse(product.imagesjson)
+    : [product.thumbnail];
   const discountedPrice = Math.round(price * (1 - discount / 100));
 
   const handleAddToCart = () => addToCart(product, quantity);
@@ -223,23 +227,24 @@ const ProductDetailPage = () => {
         <Breadcrumb.Item linkAs={Link} linkProps={{ to: "/products" }}>
           Products
         </Breadcrumb.Item>
+
         <Breadcrumb.Item className="text-white" active>
-          {product.Name}
+          {product.name}
         </Breadcrumb.Item>
       </Breadcrumb>
 
       <Row className="gy-5 mt-2">
-        {/* Image Gallery Column */}
         <Col lg={6} className="animate__animated animate__fadeInLeft">
           <div className="main-image-wrapper">
             <Image
               src={selectedImage}
-              alt={product.Name}
+              alt={product.name}
               className="main-image"
               fluid
             />
           </div>
-          {/* {imageGallery.length > 1 && (
+
+          {imageGallery.length > 1 && (
             <div className="film-strip-gallery">
               {imageGallery.map((img, index) => (
                 <Image
@@ -253,10 +258,9 @@ const ProductDetailPage = () => {
                 />
               ))}
             </div>
-          )} */}
+          )}
         </Col>
 
-        {/* Product Details Column */}
         <Col
           lg={6}
           className="animate__animated animate__fadeInRight"
@@ -268,9 +272,10 @@ const ProductDetailPage = () => {
               bg="secondary"
               className="mb-3 product-category-badge align-self-start"
             >
-              {product.Category}
+              {product.category}
             </Badge>
-            <h1 className="product-title-detail">{product.Name}</h1>
+            <h1 className="product-title-detail">{product.name}</h1>
+
             <div
               className="d-flex align-items-center my-3"
               style={{ minHeight: "28px" }}
@@ -305,6 +310,7 @@ const ProductDetailPage = () => {
                 </span>
               )}
             </div>
+
             <h2 className="my-3 product-price-detail">
               ₹{discountedPrice.toLocaleString("en-IN")}
               {discount > 0 && (
@@ -313,8 +319,11 @@ const ProductDetailPage = () => {
                 </span>
               )}
             </h2>
+
             <p className="description-preview text-white-50">
-              {product.Description.substring(0, 150)}...
+              {product.description
+                ? `${product.description.substring(0, 150)}...`
+                : "No description available."}
             </p>
 
             <ListGroup variant="flush" className="my-3">
@@ -374,7 +383,6 @@ const ProductDetailPage = () => {
         </Col>
       </Row>
 
-      {/* Tabs Section */}
       <Row className="mt-5 pt-5" id="reviews">
         <Col>
           <div className="glass-card tabs-glass-card">
@@ -384,21 +392,18 @@ const ProductDetailPage = () => {
               className="product-tabs mb-4"
               justify
             >
-              {/* Description Tab */}
               <Tab eventKey="description" title="Description">
-                <p className="mt-3 text-white-50">{product.Description}</p>
+                <p className="mt-3 text-white-50">{product.description}</p>
               </Tab>
-
-              {/* Additional Information Tab */}
               <Tab eventKey="additionalInfo" title="Additional Information">
                 <ListGroup variant="flush" className="mt-3">
                   <ListGroup.Item className="bg-transparent d-flex justify-content-between text-white border-secondary px-0 py-2">
                     <strong>Brand:</strong>
-                    <span>{product.Brand || "Unbranded"}</span>
+                    <span>{product.brand || "Unbranded"}</span>
                   </ListGroup.Item>
                   <ListGroup.Item className="bg-transparent d-flex justify-content-between text-white border-secondary px-0 py-2">
                     <strong>Category:</strong>
-                    <span>{product.Category}</span>
+                    <span>{product.category}</span>
                   </ListGroup.Item>
                   <ListGroup.Item className="bg-transparent d-flex justify-content-between text-white border-secondary px-0 py-2">
                     <strong>Items In Stock:</strong>
@@ -407,7 +412,6 @@ const ProductDetailPage = () => {
                 </ListGroup>
               </Tab>
 
-              {/* Reviews Tab */}
               <Tab eventKey="reviews" title={`Reviews (${reviews.length})`}>
                 <ReviewsTab productId={id} onReviewsLoad={setReviews} />
               </Tab>

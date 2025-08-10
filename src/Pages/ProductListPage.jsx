@@ -99,7 +99,7 @@ const ProductListPage = () => {
           <Row xs={1} sm={2} md={3} className="g-4">
             {products.length > 0 ? (
               products.map((product) => (
-                <Col key={product.ProductID}>
+                <Col key={product.productid}>
                   <ProductCard product={product} />
                 </Col>
               ))

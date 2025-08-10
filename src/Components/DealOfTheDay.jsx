@@ -44,7 +44,11 @@ const DealOfTheDay = () => {
       try {
         setLoading(true);
         const response = await axios.get("/api/products/deal-of-the-day");
-        setDealProduct(response.data);
+        if (response.data && response.data.productid) {
+          setDealProduct(response.data);
+        } else {
+          setError("Deal of the day product not found.");
+        }
       } catch (err) {
         setError("Deal of the day is currently unavailable.");
       } finally {
@@ -75,12 +79,12 @@ const DealOfTheDay = () => {
     );
   }
 
-  if (error || !dealProduct) {
+  if (error || !dealProduct || typeof dealProduct.price !== "number") {
     return null;
   }
 
-  const price = Number(dealProduct.Price) || 0;
-  const discount = Number(dealProduct.DiscountPercentage) || 0;
+  const price = Number(dealProduct.price) || 0;
+  const discount = Number(dealProduct.discountpercentage) || 0;
   const newPrice = Math.round(price * (1 - discount / 100));
 
   return (
@@ -89,8 +93,8 @@ const DealOfTheDay = () => {
         <Row className="g-0 align-items-center">
           <Col md={6} className="deal-image-col">
             <img
-              src={dealProduct.Thumbnail}
-              alt={dealProduct.Name}
+              src={dealProduct.thumbnail}
+              alt={dealProduct.name}
               className="deal-image"
             />
           </Col>
@@ -100,10 +104,10 @@ const DealOfTheDay = () => {
               <Badge  className="badge-deal mb-3">
                 DEAL OF THE DAY
               </Badge>
-              <h2 className="deal-title">{dealProduct.Name}</h2>
+              <h2 className="deal-title">{dealProduct.name}</h2>
               <p className="deal-description lead">
-                {dealProduct.Description
-                  ? dealProduct.Description.substring(0, 120) + "..."
+                {dealProduct.description
+                  ? dealProduct.description.substring(0, 120) + "..."
                   : ""}
               </p>
 
@@ -118,7 +122,7 @@ const DealOfTheDay = () => {
                 <strong>₹{newPrice.toLocaleString("en-IN")}</strong>
               </div>
 
-              <Link to={`/product/${dealProduct.ProductID}`}>
+              <Link to={`/product/${dealProduct.productid}`}>
                 <Button variant="primary" size="lg" className="deal-button">
                   Shop Now →
                 </Button>

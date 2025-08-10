@@ -8,14 +8,12 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./ProfileDetails.css";
 
+const BACKEND_URL = "http://localhost:5000";
+
 const ProfileDetails = () => {
-  const {
-    user,
-    updateUserProfile,
-    changePassword,
-    logout,
-    manuallyUpdateUser,
-  } = useAuth();
+  const { user, token, updateUserProfile, changePassword, logout, setUser } =
+    useAuth();
+
   const [isEditing, setIsEditing] = useState(false);
   const [fullName, setFullName] = useState("");
   const [mobile, setMobile] = useState("");
@@ -29,9 +27,10 @@ const ProfileDetails = () => {
 
   useEffect(() => {
     if (user) {
-      setFullName(user.FullName || "");
-      setMobile(user.Mobile || "");
-      setImagePreview(user.ProfilePictureURL || "");
+      setFullName(user.fullname || "");
+      setMobile(user.mobile || "");
+
+      setImagePreview(user.profilepictureurl || "");
     }
   }, [user]);
 
@@ -39,6 +38,7 @@ const ProfileDetails = () => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
       setProfileImageFile(file);
+
       setImagePreview(URL.createObjectURL(file));
     } else {
       setProfileImageFile(null);
@@ -52,22 +52,29 @@ const ProfileDetails = () => {
 
     try {
       if (profileImageFile) {
-        console.log("Attempting to upload new profile picture...");
         const formData = new FormData();
         formData.append("profilePicture", profileImageFile);
 
+        const config = {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
         const uploadResponse = await axios.put(
-          "/api/auth/profile/picture",
-          formData
+          `${BACKEND_URL}/api/auth/profile/picture`,
+          formData,
+          config
         );
 
-        manuallyUpdateUser(uploadResponse.data.user);
+        setUser(uploadResponse.data.user);
 
         toast.success(uploadResponse.data.message);
         setProfileImageFile(null);
       }
 
-      if (fullName !== user.FullName || mobile !== user.Mobile) {
+      if (fullName !== user.fullname || mobile !== user.mobile) {
         await updateUserProfile({ fullName, mobile });
         toast.success("Profile details updated!");
       }
@@ -96,8 +103,11 @@ const ProfileDetails = () => {
 
   const handleCancelEdit = () => {
     if (user) {
-      setFullName(user.FullName || "");
-      setMobile(user.Mobile || "");
+      setFullName(user.fullname || "");
+      setMobile(user.mobile || "");
+      setImagePreview(
+        user.profilepictureurl ? `${BACKEND_URL}${user.profilepictureurl}` : ""
+      );
     }
     setIsEditing(false);
   };
@@ -150,7 +160,7 @@ const ProfileDetails = () => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Email Address</Form.Label>
-            <Form.Control type="email" value={user.Email} disabled readOnly />
+            <Form.Control type="email" value={user.email} disabled readOnly />
           </Form.Group>
           <hr className="my-4" />
           <h6 className="mt-3">Change Password</h6>
@@ -179,7 +189,6 @@ const ProfileDetails = () => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Confirm New Password</Form.Label>
-
             <Form.Control
               type="password"
               value={confirmPassword}
@@ -203,36 +212,40 @@ const ProfileDetails = () => {
         </Form>
       ) : (
         <div className="text-center">
-          {user.ProfilePictureURL ? (
+          {user && user.profilepictureurl ? (
             <Image
-              src={user.ProfilePictureURL}
+              src={user.profilepictureurl}
               roundedCircle
               width={120}
               height={120}
               className="profile-avatar"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/default-avatar.png";
+              }}
             />
           ) : (
             <FaUserCircle size={100} className="profile-avatar-modal" />
           )}
-          <h4 className="mt-3">{user.FullName}</h4>
-          <p className="text-white-50">{user.Email}</p>
+          <h4 className="mt-3">{user.fullname}</h4>
+          <p className="text-white-50">{user.email}</p>
           <hr />
           <div className="text-start profile-info-section">
             <p>
               <strong className="profile-info-label">Full Name:</strong>
               <span className="profile-info-value">
-                {user.FullName || "Not Set"}
+                {user.fullname || "Not Set"}
               </span>
             </p>
             <p>
               <strong className="profile-info-label">Mobile:</strong>
               <span className="profile-info-value">
-                {user.Mobile || "Not Set"}
+                {user.mobile || "Not Set"}
               </span>
             </p>
             <p>
               <strong className="profile-info-label">Email:</strong>
-              <span className="profile-info-value">{user.Email}</span>
+              <span className="profile-info-value">{user.email}</span>
             </p>
           </div>
           <Button className="edit-btn mt-4 " onClick={() => setIsEditing(true)}>

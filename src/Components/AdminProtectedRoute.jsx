@@ -9,7 +9,7 @@ const AdminProtectedRoute = () => {
   console.log("AdminProtectedRoute is running...");
   console.log("Current user object:", user);
 
-   if (!user || user.Role !== 'admin') {
+   if (!user || user.role !== 'admin') {
     return <Navigate to="/login" replace />;
   }
   

@@ -51,12 +51,12 @@ const CartPage = () => {
     );
   };
 
-  const totalItems = cartItems.reduce((acc, item) => acc + item.qty, 0);
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const subtotal = cartItems.reduce((acc, item) => {
-    const price = Number(item.Price) || 0;
-    const discount = Number(item.DiscountPercentage) || 0;
+    const price = Number(item.price) || 0;
+    const discount = Number(item.discountpercentage) || 0;
     const discountedPrice = Math.round(price * (1 - discount / 100));
-    return acc + item.qty * discountedPrice;
+    return acc + item.quantity * discountedPrice;
   }, 0);
 
   if (cartItems.length === 0) {
@@ -81,24 +81,24 @@ const CartPage = () => {
       <Row className="gy-4">
         <Col lg={8}>
           {cartItems.map((item) => {
-            const price = Number(item.Price) || 0;
-            const discount = Number(item.DiscountPercentage) || 0;
+            const price = Number(item.price) || 0;
+            const discount = Number(item.discountpercentage) || 0;
             const discountedPrice = Math.round(price * (1 - discount / 100));
 
             return (
-              <div key={item.ProductID} className="cart-item-card">
+              <div key={item.productid} className="cart-item-card">
                 {" "}
                 <Row className="align-items-center">
                   <Col md={2} xs={3}>
-                    <Image src={item.Thumbnail} alt={item.Name} fluid rounded />{" "}
+                    <Image src={item.thumbnail} alt={item.name} fluid rounded />{" "}
                   </Col>
                   <Col md={4} xs={9}>
                     <Link
-                      to={`/product/${item.ProductID}`}
+                      to={`/product/${item.productid}`}
                       className="text-white h5 text-decoration-none"
                     >
                       {" "}
-                      {item.Name}
+                      {item.name}
                     </Link>
                     <p className="text-white-50 mb-0">
                       Price: ₹{discountedPrice}
@@ -113,20 +113,20 @@ const CartPage = () => {
                       <button
                         className="quantity-btn"
                         onClick={() =>
-                          updateCartQuantity(item.ProductID, item.qty - 1)
+                          updateCartQuantity(item.productid, item.quantity - 1)
                         }
-                        disabled={item.qty <= 1}
+                        disabled={item.quantity <= 1}
                       >
                         {" "}
                         <FaMinus />
                       </button>
-                      <span className="qty-display">{item.qty}</span>
+                      <span className="qty-display">{item.quantity}</span>
                       <button
                         className="quantity-btn"
                         onClick={() =>
-                          updateCartQuantity(item.ProductID, item.qty + 1)
+                          updateCartQuantity(item.productid, item.quantity + 1)
                         }
-                        disabled={item.qty >= item.Stock}
+                        disabled={item.quantity >= item.stock}
                       >
                         {" "}
                         <FaPlus />
@@ -138,13 +138,13 @@ const CartPage = () => {
                     xs={4}
                     className="text-end fw-bold text-white mt-3 mt-md-0"
                   >
-                    ₹{(discountedPrice * item.qty).toFixed(2)}
+                    ₹{(discountedPrice * item.quantity).toFixed(2)}
                   </Col>
                   <Col md={1} xs={2} className="text-end mt-3 mt-md-0">
                     <Button
                       variant="outline-danger"
                       size="sm"
-                      onClick={() => handleRemove(item.ProductID, item.Name)}
+                      onClick={() => handleRemove(item.productid, item.name)}
                     >
                       {" "}
                       <FaTrash />

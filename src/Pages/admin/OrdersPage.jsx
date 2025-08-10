@@ -93,7 +93,7 @@ const OrdersPage = () => {
 
   const handleShowStatusModal = (order) => {
     setSelectedOrderForStatus(order);
-    setNewStatus(order.OrderStatus);
+    setNewStatus(order.orderstatus);
     setShowStatusModal(true);
   };
   const handleCloseStatusModal = () => setShowStatusModal(false);
@@ -104,7 +104,7 @@ const OrdersPage = () => {
     const originalOrders = [...orders];
 
     const updatedOrders = orders.map((order) =>
-      order.OrderID === selectedOrderForStatus.OrderID
+      order.orderid === selectedOrderForStatus.orderid
         ? { ...order, OrderStatus: newStatus }
         : order
     );
@@ -113,7 +113,7 @@ const OrdersPage = () => {
 
     try {
       const response = await axios.put(
-        `/api/orders/admin/${selectedOrderForStatus.OrderID}/status`,
+        `/api/orders/admin/${selectedOrderForStatus.orderid}/status`,
         { status: newStatus }
       );
       toast.success(response.data.message);
@@ -144,11 +144,11 @@ const OrdersPage = () => {
             </thead>
             <tbody>
               {orders.map((order) => (
-                <tr key={order.OrderID}>
-                  <td>#{order.OrderID}</td>
-                  <td>{order.Username}</td>
+                <tr key={order.orderid}>
+                  <td>#{order.orderid}</td>
+                  <td>{order.username}</td>
                   <td>
-                    {new Date(order.OrderDate).toLocaleString("en-GB", {
+                    {new Date(order.orderdate).toLocaleString("en-GB", {
                       day: "2-digit",
                       month: "short",
                       year: "numeric",
@@ -157,10 +157,15 @@ const OrdersPage = () => {
                       hour12: true,
                     })}
                   </td>
-                  <td>₹{Number(order.TotalPrice).toLocaleString("en-IN")}</td>
                   <td>
-                    <Badge bg={getStatusBadge(order.OrderStatus)}>
-                      {order.OrderStatus}
+                    ₹
+                    {typeof order.totalprice === "number"
+                      ? order.totalprice.toLocaleString("en-IN")
+                      : "N/A"}
+                  </td>
+                  <td>
+                    <Badge bg={getStatusBadge(order.orderstatus)}>
+                      {order.orderstatus}
                     </Badge>
                   </td>
                   <td>
@@ -213,30 +218,30 @@ const OrdersPage = () => {
       {selectedOrder && (
         <Modal show={showModal} onHide={handleCloseModal} centered>
           <Modal.Header closeButton className="bg-dark text-white">
-            <Modal.Title>Order Details: #{selectedOrder.OrderID}</Modal.Title>
+            <Modal.Title>Order Details: #{selectedOrder.orderid}</Modal.Title>
           </Modal.Header>
           <Modal.Body className="bg-dark text-white">
-            <h5>Customer: {selectedOrder.Username}</h5>
-            <p className="text-muted">{selectedOrder.Email}</p>
+            <h5>Customer: {selectedOrder.username}</h5>
+            <p className="text-muted">{selectedOrder.email}</p>
             <hr />
             <p>
               <strong>Date:</strong>{" "}
-              {new Date(selectedOrder.OrderDate).toLocaleDateString()}
+              {new Date(selectedOrder.orderdate).toLocaleDateString()}
             </p>
             <p>
               <strong>Status:</strong>{" "}
-              <Badge bg={getStatusBadge(selectedOrder.OrderStatus)}>
-                {selectedOrder.OrderStatus}
+              <Badge bg={getStatusBadge(selectedOrder.orderstatus)}>
+                {selectedOrder.orderstatus}
               </Badge>
             </p>
             <p>
-              <strong>Payment Method:</strong> {selectedOrder.PaymentMethod}
+              <strong>Payment Method:</strong> {selectedOrder.paymentmethod}
             </p>
             <hr />
             <h6>Items Ordered:</h6>
             <ListGroup variant="flush">
               {selectedOrder.Items?.map((item, index) => {
-                const lineTotal = item.Quantity * item.PriceAtTimeOfOrder;
+                const lineTotal = item.quantity * item.priceattimeoforder;
 
                 return (
                   <ListGroup.Item
@@ -244,18 +249,21 @@ const OrdersPage = () => {
                     className="d-flex justify-content-between bg-dark text-white"
                   >
                     <span>
-                      {item.Name} (Qty: {item.Quantity})
+                      {item.name} (Qty: {item.quantity})
                       <br />
-                      <small className="text-muted">
+                      <small className="text-secondary">
                         @ ₹
-                        {Number(item.PriceAtTimeOfOrder).toLocaleString(
-                          "en-IN"
-                        )}
+                        {typeof item.priceattimeoforder === "number"
+                          ? item.priceattimeoforder.toLocaleString("en-IN")
+                          : "N/A"}
                         /item
                       </small>
                     </span>
                     <strong>
-                      ₹{Number(lineTotal).toLocaleString("en-IN")}
+                      ₹
+                      {typeof lineTotal === "number"
+                        ? lineTotal.toLocaleString("en-IN")
+                        : "N/A"}
                     </strong>
                   </ListGroup.Item>
                 );
@@ -265,7 +273,10 @@ const OrdersPage = () => {
             <div className="d-flex justify-content-between h5 mt-3">
               <span>Total Price:</span>
               <strong>
-                ₹{Number(selectedOrder.TotalPrice).toLocaleString("en-IN")}
+                ₹
+                {typeof selectedOrder.totalprice === "number"
+                  ? selectedOrder.totalprice.toLocaleString("en-IN")
+                  : "N/A"}
               </strong>
             </div>
           </Modal.Body>
@@ -281,7 +292,7 @@ const OrdersPage = () => {
         <Modal show={showStatusModal} onHide={handleCloseStatusModal} centered>
           <Modal.Header closeButton className="bg-dark text-white">
             <Modal.Title>
-              Update Status for Order #{selectedOrderForStatus.OrderID}
+              Update Status for Order #{selectedOrderForStatus.orderid}
             </Modal.Title>
           </Modal.Header>
           <Form onSubmit={handleStatusUpdate}>

@@ -72,7 +72,7 @@ const AddressManager = () => {
       let response;
       if (editingAddress) {
         response = await axios.put(
-          `http://localhost:5000/api/addresses/update/${editingAddress.AddressID}`,
+          `http://localhost:5000/api/addresses/update/${editingAddress.addressid}`,
           formData
         );
         toast.success("Address updated successfully!");
@@ -218,16 +218,16 @@ const AddressManager = () => {
         (addresses.length > 0 ? (
           <ListGroup>
             {addresses.map((addr) => (
-              <ListGroup.Item key={addr.AddressID} className="address-card">
+              <ListGroup.Item key={addr.addressid} className="address-card">
                 <div>
                   <p className="fw-bold mb-1">{addr.AddressLine1}</p>
                   <p className="mb-0 text-white-50">
-                    {addr.City}, {addr.State} - {addr.PostalCode}
+                    {addr.city}, {addr.state} - {addr.postalCode}
                   </p>
                 </div>
                 <div className="address-card-actions">
                   <FaEdit onClick={() => handleEditClick(addr)} />
-                  <FaTrash onClick={() => handleDelete(addr.AddressID)} />
+                  <FaTrash onClick={() => handleDelete(addr.addressid)} />
                 </div>
               </ListGroup.Item>
             ))}

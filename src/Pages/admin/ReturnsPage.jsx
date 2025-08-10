@@ -33,7 +33,7 @@ const ReturnsPage = () => {
        params: { page: currentPage, limit: 10 },
      });
      setReturns(response.data.returns);
-     setTotalPages(response.data.totalPages);
+     setTotalPages(response.data.totalpages);
    } catch (err) {
      setError("Failed to fetch return requests.");
    } finally {
@@ -47,7 +47,7 @@ const ReturnsPage = () => {
 
   const handleShowModal = (returnRequest) => {
     setSelectedReturn(returnRequest);
-    setNewStatus(returnRequest.ReturnStatus); 
+    setNewStatus(returnRequest.returnstatus); 
     setShowModal(true);
   };
 
@@ -64,7 +64,7 @@ const ReturnsPage = () => {
     try {
       const payload = { status: newStatus, adminComment };
       await axios.put(
-        `/api/returns/admin/${selectedReturn.ReturnID}/status`,
+        `/api/returns/admin/${selectedReturn.returnid}/status`,
         payload
       );
       toast.success("Return status updated successfully!");
@@ -120,15 +120,15 @@ const ReturnsPage = () => {
           </thead>
           <tbody>
             {returns.map((req) => (
-              <tr key={req.ReturnID}>
-                <td>#{req.ReturnID}</td>
-                <td>#{req.OrderID}</td>
-                <td>{req.CustomerName}</td>
-                <td>{req.ProductName}</td>
-                <td>{req.Reason}</td>
+              <tr key={req.returnid}>
+                <td>#{req.returnid}</td>
+                <td>#{req.orderid}</td>
+                <td>{req.customername}</td>
+                <td>{req.productname}</td>
+                <td>{req.reason}</td>
                 <td>
-                  <Badge bg={getStatusBadge(req.ReturnStatus)}>
-                    {req.ReturnStatus}
+                  <Badge bg={getStatusBadge(req.returnstatus)}>
+                    {req.returnstatus}
                   </Badge>
                 </td>
                 <td>
@@ -144,7 +144,7 @@ const ReturnsPage = () => {
             ))}
           </tbody>
         </Table>
-         {/* Pagination Component */}
+      
           {totalPages > 1 && (
             <div className="d-flex justify-content-center mt-4">
                 <ReactPaginate
@@ -164,24 +164,24 @@ const ReturnsPage = () => {
         </>
       )}
 
-      {/* Update Status Modal */}
+      
       {selectedReturn && (
         <Modal show={showModal} onHide={handleCloseModal} centered>
           <Modal.Header closeButton className="bg-dark text-white">
             <Modal.Title>
-              Update Return Request #{selectedReturn.ReturnID}
+              Update Return Request #{selectedReturn.returnid}
             </Modal.Title>
           </Modal.Header>
           <Form onSubmit={handleStatusUpdate}>
             <Modal.Body className="bg-dark text-white">
               <p>
-                <strong>Customer:</strong> {selectedReturn.CustomerName}
+                <strong>Customer:</strong> {selectedReturn.customername}
               </p>
               <p>
-                <strong>Product:</strong> {selectedReturn.ProductName}
+                <strong>Product:</strong> {selectedReturn.productname}
               </p>
               <p>
-                <strong>Reason:</strong> {selectedReturn.Reason}
+                <strong>Reason:</strong> {selectedReturn.reason}
               </p>
               <hr />
               <Form.Group className="mb-3">

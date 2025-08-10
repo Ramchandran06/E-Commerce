@@ -64,8 +64,8 @@ const CheckoutPage = () => {
   }, []);
 
   const subtotal = cartItems.reduce((acc, item) => {
-    const discountedPrice = item.Price;
-    return acc + item.qty * discountedPrice;
+    const discountedPrice = item.price;
+    return acc + item.quantity * discountedPrice;
   }, 0);
 
   const placeOrderHandler = async () => {
@@ -128,7 +128,7 @@ const CheckoutPage = () => {
               );
               toast.success("Payment successful and order placed!");
               clearCart();
-              if (user && user.Role === "admin") {
+              if (user && user.role === "admin") {
                 navigate("/admin");
               } else {
                 navigate("/my-orders");
@@ -139,9 +139,9 @@ const CheckoutPage = () => {
             }
           },
           prefill: {
-            name: user.FullName,
-            email: user.Email,
-            contact: user.Mobile,
+            name: user.fullname,
+            email: user.email,
+            contact: user.mobile,
           },
           theme: {
             color: "#8A2BE2",
@@ -188,7 +188,7 @@ const CheckoutPage = () => {
       <Row className="gy-4">
         <Col lg={7}>
           <div className="checkout-form-card">
-            {/* Shipping Address Section */}
+           
             <h4 className="mb-4">1. Select Shipping Address</h4>
             {error && (
               <Alert variant="warning">
@@ -196,20 +196,20 @@ const CheckoutPage = () => {
               </Alert>
             )}
             {addresses.map((addr) => (
-              <div key={addr.AddressID} className="address-selection-card mb-3">
+              <div key={addr.addressid} className="address-selection-card mb-3">
                 <Form.Check
                   type="radio"
-                  id={`addr-${addr.AddressID}`}
+                  id={`addr-${addr.addressid}`}
                   name="shippingAddress"
-                  checked={selectedAddressId === addr.AddressID}
-                  onChange={() => setSelectedAddressId(addr.AddressID)}
+                  checked={selectedAddressId === addr.addressid}
+                  onChange={() => setSelectedAddressId(addr.addressid)}
                   label={
                     <div>
                       <p className="fw-bold mb-1">
-                        {addr.AddressLine1}, {addr.AddressLine2}
+                        {addr.addressline1}, {addr.addressline2}
                       </p>
                       <p className="text-white-50 mb-0">
-                        {addr.City}, {addr.State} - {addr.PostalCode}
+                        {addr.city}, {addr.state} - {addr.postalcode}
                       </p>
                     </div>
                   }
@@ -261,20 +261,20 @@ const CheckoutPage = () => {
           </div>
         </Col>
 
-        {/* Order Summary Section */}
+        
         <Col lg={5}>
           <div className="checkout-summary-card">
             <h4>Your Order</h4>
             <hr />
             {cartItems.map((item) => {
               const discountedPrice = Math.round(
-                item.Price * (1 - item.DiscountPercentage / 100)
+                item.price * (1 - item.discountpercentage / 100)
               );
               return (
-                <Row key={item.ProductID} className="align-items-center mb-3">
+                <Row key={item.productid} className="align-items-center mb-3">
                   <Col xs={3}>
                     <Image
-                      src={item.Thumbnail}
+                      src={item.thumbnail}
                       fluid
                       rounded
                       className="summary-item-img"
@@ -282,13 +282,13 @@ const CheckoutPage = () => {
                   </Col>
                   <Col xs={6}>
                     <p className="mb-0">
-                      {item.Name}
+                      {item.name}
                       <br />
-                      <small className="text-white-50">Qty: {item.qty}</small>
+                      <small className="text-white-50">Qty: {item.quantity}</small>
                     </p>
                   </Col>
                   <Col xs={3} className="text-end">
-                    ₹{discountedPrice * item.qty}
+                    ₹{discountedPrice * item.quantity}
                   </Col>
                 </Row>
               );

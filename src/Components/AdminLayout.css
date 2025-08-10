@@ -1,25 +1,82 @@
 .admin-wrapper {
   background-color: #1c2541;
   min-height: 100vh;
+  color: white;
 }
 
 .admin-sidebar {
   background-color: #161d31;
   min-height: 100vh;
-  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease-in-out;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.admin-sidebar .offcanvas-body {
+  padding: 0;
+}
+
+.sidebar-structure {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.brand-title-admin {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.5rem;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #2a3457;
+}
+
+.nav-container {
+  padding: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .admin-sidebar .nav-link {
-  color: #adb5bd;
-  padding: 12px 15px;
+  color: #aeb8d3;
+  padding: 14px 20px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  margin-bottom: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
 }
-.admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active {
-  background-color: #00aaff;
+
+.admin-sidebar .nav-link:hover {
+  background-color: #2a3457;
   color: white;
 }
 
-.admin-content {
-  padding: 30px;
+.admin-sidebar .nav-link.active {
+  background-color: #00aaff;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 170, 255, 0.2);
+}
+
+.admin-content-wrapper {
+  width: 100%;
+}
+
+
+@media (min-width: 768px) {
+  .admin-sidebar.offcanvas-md {
+    width: 250px;
+    border-right: 1px solid #2a3457;
+    transform: none !important;
+    visibility: visible !important;
+  }
+  .admin-sidebar .offcanvas-header {
+    display: none;
+  }
 }

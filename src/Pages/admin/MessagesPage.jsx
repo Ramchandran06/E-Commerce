@@ -45,7 +45,7 @@ const MessagesPage = () => {
     setSelectedMessage(message);
     setShowModal(true);
     if (!message.IsRead) {
-      markAsRead(message.MessageID);
+      markAsRead(message.messageid);
     }
   };
 
@@ -77,13 +77,13 @@ const MessagesPage = () => {
           </thead>
           <tbody>
             {messages.map((msg) => (
-              <tr key={msg.MessageID} className={!msg.IsRead ? "fw-bold" : ""}>
-                <td>{msg.FullName}</td>
-                <td>{msg.Subject}</td>
-                <td>{new Date(msg.ReceivedAt).toLocaleString()}</td>
+              <tr key={msg.messageid} className={!msg.isread ? "fw-bold" : ""}>
+                <td>{msg.fullname}</td>
+                <td>{msg.subject}</td>
+                <td>{new Date(msg.receivedat).toLocaleString()}</td>
                 <td>
-                  <Badge bg={msg.IsRead ? "secondary" : "success"}>
-                    {msg.IsRead ? "Read" : "New"}
+                  <Badge bg={msg.isread ? "secondary" : "success"}>
+                    {msg.isread ? "Read" : "New"}
                   </Badge>
                 </td>
                 <td>
@@ -101,24 +101,24 @@ const MessagesPage = () => {
         </Table>
       )}
 
-      {/* View Message Modal */}
+      
       {selectedMessage && (
         <Modal show={showModal} onHide={handleCloseModal} centered size="lg">
           <Modal.Header closeButton className="bg-dark text-white">
-            <Modal.Title>{selectedMessage.Subject}</Modal.Title>
+            <Modal.Title>{selectedMessage.subject}</Modal.Title>
           </Modal.Header>
           <Modal.Body className="bg-dark text-white">
             <p>
-              <strong>From:</strong> {selectedMessage.FullName} (
-              {selectedMessage.Email})
+              <strong>From:</strong> {selectedMessage.fullname} (
+              {selectedMessage.email})
             </p>
             <p>
               <strong>Received:</strong>{" "}
-              {new Date(selectedMessage.ReceivedAt).toLocaleString()}
+              {new Date(selectedMessage.receivedat).toLocaleString()}
             </p>
             <hr />
             <h6>Message:</h6>
-            <p style={{ whiteSpace: "pre-wrap" }}>{selectedMessage.Message}</p>
+            <p style={{ whiteSpace: "pre-wrap" }}>{selectedMessage.message}</p>
           </Modal.Body>
           <Modal.Footer className="bg-dark text-white">
             <Button variant="secondary" onClick={handleCloseModal}>

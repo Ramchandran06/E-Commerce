@@ -64,8 +64,8 @@ const MyOrdersPage = () => {
     setIsSubmittingReturn(true);
     try {
       const payload = {
-        orderItemId: selectedItem.OrderItemID,
-        quantity: selectedItem.Quantity,
+        orderItemId: selectedItem.orderitemid,
+        quantity: selectedItem.quantity,
         reason: returnReason,
       };
       const response = await axios.post("/api/returns/request", payload);
@@ -127,47 +127,55 @@ const MyOrdersPage = () => {
         <Accordion defaultActiveKey="0" flush>
           {orders.map((order, index) => (
             <Accordion.Item
-              key={order.OrderID}
+              key={order.orderid}
               eventKey={String(index)}
               className="order-accordion-item mb-3"
             >
               <Accordion.Header>
                 <div className="d-flex justify-content-between w-100 align-items-center pe-3">
                   <div>
-                    <span className="fw-bold">Order #{order.OrderID}</span>
+                    <span className="fw-bold">Order #{order.orderid}</span>
                     <br />
                     <small className="text-secondary">
                       Placed on:{" "}
-                      {new Date(order.OrderDate).toLocaleDateString()}
+                      {new Date(order.orderdate).toLocaleDateString()}
                     </small>
                   </div>
-                  <Badge bg={getStatusBadge(order.OrderStatus)} pill>
-                    {order.OrderStatus}
+                  <Badge bg={getStatusBadge(order.orderstatus)} pill>
+                    {order.orderstatus}
                   </Badge>
                   <span className="fw-bold">
-                    ₹{Number(order.TotalPrice).toLocaleString("en-IN")}
+                    ₹
+                    {typeof order.totalprice === "number"
+                      ? `₹${order.totalprice.toLocaleString("en-IN")}`
+                      : "N/A"}
                   </span>
                 </div>
               </Accordion.Header>
               <Accordion.Body>
                 <h6>Items in this order:</h6>
-                {order.Items.map((item) => (
+                {order.items.map((item) => (
                   <Row
-                    key={item.OrderItemID}
+                    key={item.orderitemid}
                     className="align-items-center my-3"
                   >
                     <Col xs={2} md={1}>
-                      <Image src={item.Thumbnail} fluid rounded />
+                      <Image src={item.thumbnail} fluid rounded />
                     </Col>
                     <Col xs={6} md={7}>
-                      <p className="mb-0">{item.ProductName}</p>
-                      <small className="text-secondary">Qty: {item.Quantity}</small>
+                      <p className="mb-0">{item.productname}</p>
+                      <small className="text-secondary">
+                        Qty: {item.quantity}
+                      </small>
                     </Col>
                     <Col xs={4} md={2} className="text-end">
-                      ₹{Number(item.Price).toLocaleString("en-IN")}
+                      ₹
+                      {typeof item.price === "number"
+                        ? `₹${item.price.toLocaleString("en-IN")}`
+                        : "N/A"}
                     </Col>
                     <Col xs={12} md={2} className="text-md-end mt-2 mt-md-0">
-                      {order.OrderStatus === "Delivered" && (
+                      {order.orderstatus === "Delivered" && (
                         <Button
                           variant="outline-warning"
                           size="sm"
@@ -180,19 +188,19 @@ const MyOrdersPage = () => {
                   </Row>
                 ))}
                 <hr />
-                {order.ShippingAddress && (
+                {order.shippingaddress && (
                   <div>
                     <h6>Shipping Address:</h6>
-                    <p className="mb-0">{order.ShippingAddress.AddressLine1}</p>
-                    {order.ShippingAddress.AddressLine2 && (
+                    <p className="mb-0">{order.shippingaddress.addressline1}</p>
+                    {order.shippingaddress.addressline2 && (
                       <p className="mb-0">
-                        {order.ShippingAddress.AddressLine2}
+                        {order.shippingaddress.addressline2}
                       </p>
                     )}
                     <p>
-                      {order.ShippingAddress.City},{" "}
-                      {order.ShippingAddress.State} -{" "}
-                      {order.ShippingAddress.PostalCode}
+                      {order.shippingaddress.city},{" "}
+                      {order.shippingaddress.state} -{" "}
+                      {order.shippingaddress.postalcode}
                     </p>
                   </div>
                 )}
@@ -201,7 +209,7 @@ const MyOrdersPage = () => {
           ))}
         </Accordion>
       )}
-      {/* Return Request Modal */}
+
       {selectedItem && (
         <Modal show={showReturnModal} onHide={handleCloseReturnModal} centered>
           <Modal.Header closeButton className="bg-dark text-white">
@@ -211,7 +219,7 @@ const MyOrdersPage = () => {
             <Modal.Body className="bg-dark text-white">
               <p>You are requesting a return for:</p>
               <p className="fw-bold">
-                {selectedItem.ProductName} (Qty: {selectedItem.Quantity})
+                {selectedItem.productname} (Qty: {selectedItem.quantity})
               </p>
               <hr />
               <Form.Group>
